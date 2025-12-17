@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/auth"; // adjust if needed
+const API_URL = import.meta.env.VITE_API_URL; 
 
 // REGISTER USER
 export const registerUser = async (formData) => {
@@ -39,4 +39,12 @@ export const getToken = () => {
 // LOGOUT
 export const logoutUser = () => {
   localStorage.removeItem("token");
+}
+const auth = {
+  registerUser,
+  loginUser,
+  getToken,
+  logoutUser,
 };
+
+export default auth;
