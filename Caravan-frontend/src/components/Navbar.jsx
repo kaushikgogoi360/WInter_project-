@@ -23,8 +23,8 @@ function Navbar() {
         {/* Desktop Links */}
         <div className="hidden md:flex gap-8 text-lg text-black">
           <NavItem to="/">Home</NavItem>
-          <NavItem to="/complaint">Post Complaint</NavItem>
-          <NavItem to="/login">Login</NavItem>
+          <NavItem to="/SignUp">SignUp</NavItem>
+          <NavItem to="/Login">Login</NavItem>
         </div>
 
         {/* Hamburger (opens sidebar) */}
@@ -51,8 +51,8 @@ function Navbar() {
         <NavItem to="/" onClick={() => setOpen(false)}>
           Home
         </NavItem>
-        <NavItem to="/complaint" onClick={() => setOpen(false)}>
-          Post Complaint
+        <NavItem to="/SignUp" onClick={() => setOpen(false)}>
+          Sign Up
         </NavItem>
         <NavItem to="/login" onClick={() => setOpen(false)}>
           Login
