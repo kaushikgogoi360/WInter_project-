@@ -23,7 +23,7 @@ function SignUpPage() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const res = await authService.register(form);
+      const res = await authService.registerUser(form);
       setMsg(" Account created successfully!");
       setTimeout(() => navigate("/login"), 1500);
     } catch (err) {
