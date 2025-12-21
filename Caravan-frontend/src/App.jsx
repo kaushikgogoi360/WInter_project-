@@ -2,6 +2,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import LandingPage from "./Pages/LandingPage";
 import Navbar from "./components/Navbar";
 import SignUp from "./Pages/SignUp";
+import Login from "./Pages/Login";
 
 function App() {
   const location = useLocation();
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </>
   );
