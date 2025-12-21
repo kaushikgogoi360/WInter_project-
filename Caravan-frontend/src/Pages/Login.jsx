@@ -34,6 +34,8 @@ function Login() {
         navigate("/admin");
       } else if (user.role === "staff") {
         navigate("/staff");
+      } else if (user.role === "user") {
+        navigate("/user");
       } else {
         navigate("/");
       }
