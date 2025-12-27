@@ -1,29 +1,16 @@
 const router = require("express").Router();
-const { authMiddleware } = require("../middlewares/authMiddleware");
-const upload = require("../utils/upload");
 const {
   createComplaint,
-  getComplaints,
+  getUserComplaints,
+  getAssignedComplaints,
   updateStatus,
 } = require("../controllers/complaintController");
 
-router.post(
-  "/",
-  authMiddleware,
-  upload.array("images", 5),
-  createComplaint
-);
+const { authMiddleware, isStaff } = require("../middlewares/authMiddleware");
 
-router.get(
-  "/",
-  authMiddleware,
-  getComplaints
-);
-
-router.put(
-  "/:id/status",
-  authMiddleware,
-  updateStatus
-);
+router.post("/", authMiddleware, createComplaint);
+router.get("/my", authMiddleware, getUserComplaints);
+router.get("/assigned", authMiddleware, isStaff, getAssignedComplaints);
+router.put("/:id/status", authMiddleware, updateStatus);
 
 module.exports = router;

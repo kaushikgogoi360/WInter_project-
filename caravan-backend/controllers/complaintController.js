@@ -1,36 +1,33 @@
-const Complaint = require("../models/complaint");
+const Complaint = require("../models/Complaint");
 
 exports.createComplaint = async (req, res) => {
-  try {
-    const images = req.files.map(file => file.path);
+  const complaint = await Complaint.create({
+    user: req.user.id,
+    title: req.body.title,
+    description: req.body.description,
+  });
 
-    const complaint = await Complaint.create({
-      userId: req.user.id,
-      type: req.body.type,
-      description: req.body.description,
-      location: JSON.parse(req.body.location),
-      images
-    });
-
-    res.json({ msg: "Complaint created", complaint });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+  res.json({ msg: "Complaint created", complaint });
 };
 
-exports.getComplaints = async (req, res) => {
-  const complaints = await Complaint.find();
+exports.getUserComplaints = async (req, res) => {
+  const complaints = await Complaint.find({ user: req.user.id });
+  res.json(complaints);
+};
+
+exports.getAssignedComplaints = async (req, res) => {
+  const complaints = await Complaint.find({ assignedTo: req.user.id });
   res.json(complaints);
 };
 
 exports.updateStatus = async (req, res) => {
   const { status } = req.body;
 
-  const updated = await Complaint.findByIdAndUpdate(
+  const complaint = await Complaint.findByIdAndUpdate(
     req.params.id,
     { status },
     { new: true }
   );
 
-  res.json(updated);
+  res.json({ msg: "Status updated", complaint });
 };
